@@ -1,0 +1,32 @@
+{
+  "name": "hapi-version-prereq",
+  "version": "1.0.0",
+  "description": "automgaically populates the version prereq for routes that support it",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:opentable/hapi-version-prereq.git"
+  },
+  "keywords": [
+    "hapi"
+  ],
+  "author": "Andy Royle <ajroyle@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opentable/hapi-version-prereq/issues"
+  },
+  "homepage": "https://github.com/opentable/hapi-version-prereq",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^0.5.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-mocha-test": "^0.10.2",
+    "joi": "^4.7.0",
+    "should": "^3.3.1"
+  },
+  "dependencies": {}
+}
