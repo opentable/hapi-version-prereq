@@ -1,6 +1,6 @@
 exports.register = function (plugin, options, next) {
 
-    plugin.ext('onPreHandler', function(request, extNext){
+    plugin.ext('onPreHandler', function(request, reply){
 
       request.pre = request.pre || {};
       request.url.pathname = request.url.pathname || "";
@@ -10,24 +10,24 @@ exports.register = function (plugin, options, next) {
       if(request.url.pathname.match(urlRegex)){
         var bits = request.url.pathname.split("/");
         request.pre.version = { version: bits[1], mode: "url" };
-        return extNext();
+        return reply.continue();
       }
 
       var headerRegex = /application\/vnd.([A-Za-z-]+).([A-Za-z-]+).(v\d+)\+json/;
       var accept = request.headers.accept;
 
       if(!accept){
-          return extNext();
+          return reply.continue();
       }
 
       var matches = accept.match(headerRegex);
 
       if(!matches || matches.length < 3){
-          return extNext();
+          return reply.continue();
       }
 
       request.pre.version = { version: matches[3], mode: "header" };
-      extNext();
+      return reply.continue();
     });
 
     plugin.log(["version-prereq"], "registered version prereq");
