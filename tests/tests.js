@@ -23,11 +23,11 @@ describe('tests', function(){
       url: { pathname: '/v1/my-url' }
     };
 
-    handler(request, function(){
+    handler(request, { continue: function(){
       request.pre.version.version.should.eql('v1');
       request.pre.version.mode.should.eql('url');
       done();
-    });
+    }});
   });
 
   it('should correctly parse a version header', function(done){
@@ -37,11 +37,11 @@ describe('tests', function(){
       url: { pathname: '/my-url' }
     };
 
-    handler(request, function(){
+    handler(request, { continue: function(){
       request.pre.version.version.should.eql('v1');
       request.pre.version.mode.should.eql('header');
       done();
-    });
+    }});
   });
 
   it('should not break if pre is undefined', function(done){
@@ -50,11 +50,11 @@ describe('tests', function(){
       url: { pathname: '/my-url' }
     };
 
-    handler(request, function(){
+    handler(request, { continue: function(){
       request.pre.version.version.should.eql('v1');
       request.pre.version.mode.should.eql('header');
       done();
-    });
+    }});
   });
 
   it('should ignore a non-versioned route', function(done){
@@ -64,10 +64,10 @@ describe('tests', function(){
       url: { pathname: '/my-url' }
     };
 
-    handler(request, function(){
+    handler(request, { continue: function(){
       (request.pre.version === undefined).should.be.true;
       done();
-    });
+    }});
   });
 
   it('should not break if the path is empty', function(done){
@@ -77,10 +77,10 @@ describe('tests', function(){
       url: {}
     };
 
-    handler(request, function(){
+    handler(request, { continue: function(){
       (request.pre.version === undefined).should.be.true;
       done();
-    });
+    }});
   });
 
   it('should give precedence to url version if both header and url version are supplied', function(done){
@@ -90,11 +90,11 @@ describe('tests', function(){
       url: { pathname: '/v2/my-url'}
     };
 
-    handler(request, function(){
+    handler(request, { continue: function(){
       request.pre.version.version.should.eql('v2');
       request.pre.version.mode.should.eql('url');
       done();
-    });
+    }});
   });
 
   it('should not match an invalid accept header', function(done){
@@ -104,9 +104,9 @@ describe('tests', function(){
       url: { pathname: '/my-url'}
     };
 
-    handler(request, function(){
+    handler(request, { continue: function(){
       (request.pre.version === undefined).should.be.true;
       done();
-    });
+    }});
   });
 });
