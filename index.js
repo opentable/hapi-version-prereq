@@ -5,15 +5,15 @@ exports.register = function (plugin, options, next) {
       request.pre = request.pre || {};
       request.url.pathname = request.url.pathname || "";
 
-      var urlRegex = /\/v\d+\/[A-Za-z-]+/;
+      var urlRegex = /\/v(\d+)\/[A-Za-z-]+/;
+      var urlMatches = request.url.pathname.match(urlRegex);
 
-      if(request.url.pathname.match(urlRegex)){
-        var bits = request.url.pathname.split("/");
-        request.pre.version = { version: bits[1], mode: "url" };
+      if(urlMatches){
+        request.pre.version = { version: parseInt(urlMatches[1]), mode: "url" };
         return reply.continue();
       }
 
-      var headerRegex = /application\/vnd.([A-Za-z-]+).([A-Za-z-]+).(v\d+)\+json/;
+      var headerRegex = /application\/vnd.([A-Za-z-]+).([A-Za-z-]+).v(\d+)\+json/;
       var accept = request.headers.accept;
 
       if(!accept){
@@ -26,7 +26,7 @@ exports.register = function (plugin, options, next) {
           return reply.continue();
       }
 
-      request.pre.version = { version: matches[3], mode: "header" };
+      request.pre.version = { version: parseInt(matches[3]), mode: "header" };
       return reply.continue();
     });
 
