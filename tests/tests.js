@@ -24,7 +24,7 @@ describe('tests', function(){
     };
 
     handler(request, { continue: function(){
-      request.pre.version.version.should.eql('v1');
+      request.pre.version.version.should.eql(1);
       request.pre.version.mode.should.eql('url');
       done();
     }});
@@ -38,7 +38,7 @@ describe('tests', function(){
     };
 
     handler(request, { continue: function(){
-      request.pre.version.version.should.eql('v1');
+      request.pre.version.version.should.eql(1);
       request.pre.version.mode.should.eql('header');
       done();
     }});
@@ -51,7 +51,7 @@ describe('tests', function(){
     };
 
     handler(request, { continue: function(){
-      request.pre.version.version.should.eql('v1');
+      request.pre.version.version.should.eql(1);
       request.pre.version.mode.should.eql('header');
       done();
     }});
@@ -91,7 +91,7 @@ describe('tests', function(){
     };
 
     handler(request, { continue: function(){
-      request.pre.version.version.should.eql('v2');
+      request.pre.version.version.should.eql(2);
       request.pre.version.mode.should.eql('url');
       done();
     }});
