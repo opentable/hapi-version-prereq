@@ -9,7 +9,8 @@ exports.register = function (plugin, options, next) {
       var urlMatches = request.url.pathname.match(urlRegex);
 
       if(urlMatches){
-        request.pre.version = { version: parseInt(urlMatches[1]), mode: "url" };
+        var versionNumberFromUrl = parseInt(urlMatches[1]);
+        request.pre.version = { versionNumber: versionNumberFromUrl, version: 'v' + versionNumberFromUrl, mode: "url" };
         return reply.continue();
       }
 
@@ -25,8 +26,9 @@ exports.register = function (plugin, options, next) {
       if(!matches || matches.length < 3){
           return reply.continue();
       }
+      var versionNumberFromHeader = parseInt(matches[3]);
 
-      request.pre.version = { version: parseInt(matches[3]), mode: "header" };
+      request.pre.version = { versionNumber: versionNumberFromHeader, version: 'v' + versionNumberFromHeader, mode: "header" };
       return reply.continue();
     });
 
