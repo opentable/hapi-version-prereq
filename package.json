@@ -1,6 +1,6 @@
 {
   "name": "hapi-version-prereq",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "automgaically populates the version prereq for routes that support it",
   "main": "index.js",
   "scripts": {
